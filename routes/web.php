@@ -37,3 +37,7 @@ Route::get('/a-propos', function () {
 Route::get('/temoignage', function () {
     return view('client.temoignage');
 })->name('temoignage');
+Route::get('/connexion', function () {
+    return view('client.connexion');
+})->name('connexion');
+

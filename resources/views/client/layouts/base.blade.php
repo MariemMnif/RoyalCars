@@ -85,7 +85,7 @@
                                 <a href="detail.html" class="dropdown-item">Voiture de luxe</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">ESPACE CLIENT</a>
+                        <a href="{{ route('connexion') }}" class="nav-item nav-link">ESPACE CLIENT</a>
                         <a href="{{ route('a-propos') }}" class="nav-item nav-link">À propos</a>
                         <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
                     </div>

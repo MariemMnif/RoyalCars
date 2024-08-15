@@ -5,4 +5,5 @@
 @section('contenu')
     @include('client.layouts.carousel')
 
+
 @endsection
