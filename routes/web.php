@@ -40,4 +40,6 @@ Route::get('/temoignage', function () {
 Route::get('/connexion', function () {
     return view('client.connexion');
 })->name('connexion');
-
+Route::get('/listVoitures', function () {
+    return view('client.listVoitures');
+})->name('listVoitures');

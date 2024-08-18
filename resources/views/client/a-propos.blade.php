@@ -91,79 +91,7 @@
     </div>
     <!-- Pourquoi End -->
 
-
-    <!-- services1 Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <h1 class="display-4 text-uppercase text-center mb-5">Nos Produits et services</h1>
-            <p class=" text-uppercase text-center">Pour vos locations de voitures en Tunisie, Royal Cars vous propose
-                plusieurs produits et services adaptés à
-                vos
-                besoins.</p>
-            <div class="owl-carousel team-carousel position-relative" style="padding: 0 30px;">
-                <div class="team-item flex-column justify-content-center  ">
-                    <img class="img-fluid w-200" src="img/lDuree.jfif" alt="">
-                    <div class="position-relative py-4">
-                        <h4 class="text-uppercase">Location longue durée</h4>
-                        <p class="m-0">Location voiture longue durée comprenant assurances tous risques et entretien
-                            inclus.</p>
-                    </div>
-                </div>
-
-                <div class="team-item flex-column justify-content-center  ">
-                    <img class="img-fluid w-100" src="img/locchauff.jfif" alt="">
-                    <div class="position-relative py-4">
-                        <h4 class="text-uppercase">Location voiture avec chauffeur</h4>
-                        <p class="m-0"> Location voiture avec un chauffeur à disposition 150 TND /Jour.</p>
-                    </div>
-                </div>
-
-                <div class="team-item flex-column justify-content-center  ">
-                    <img class="img-fluid w-100" src="img/gps.jfif" alt="">
-                    <div class="position-relative py-4">
-                        <h4 class="text-uppercase"> GPS</h4>
-                        <p class="m-0"> Trouver facilement votre destination sans perte de temps 2 TND /Jour.</p><br>
-                    </div>
-                </div>
-
-                <div class="team-item flex-column justify-content-center  ">
-                    <img class="img-fluid w-150" src="img/siegebebe.jfif" alt="">
-                    <div class="position-relative py-4">
-                        <h4 class="text-uppercase">Siège Bébé</h4>
-                        <p class="m-0">
-                            Offrez plus de sécurité avec un siège bébé, avec un coût supplémentaire. </p>
-
-                    </div>
-                </div>
-
-                <div class="team-item flex-column justify-content-center  ">
-                    <img class="img-fluid w-100" src="img/boiteauto.jfif" alt="">
-                    <div class="position-relative py-4">
-                        <h4 class="text-uppercase">Location voiture boite automatique</h4>
-                        <p class="m-0">
-                            Optez pour une conduite sans effort avec nos véhicules à boîte
-                            automatique</p>
-
-                    </div>
-                </div>
-
-                <div class="team-item flex-column justify-content-center  ">
-                    <img class="img-fluid w-100" src="img/locluxe.jfif" alt="">
-                    <div class="position-relative py-4">
-                        <h4 class="text-uppercase">Location voitures de luxe</h4>
-                        <p class="m-0">
-                            Vivez le raffinement avec nos voitures de luxe, parfaites pour vos
-                            mariages et événements spéciaux.
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    </div>
-    <!-- services End -->
-
-    <!-- Services2 Start -->
+    <!-- Services Start -->
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <h1 class="display-4 text-uppercase text-center mb-5">Nos Produits et services</h1>
@@ -222,8 +150,8 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mb-2">
                     <div class="service-item d-flex flex-column justify-content-center px-4 mb-4">
-                        <div class="d-flex justify-content-center mb-3"> <img class="img-fluid w-150"
-                                src="img/locluxe.jfif" alt="">
+                        <div class="d-flex justify-content-center mb-3"> <img class="img-fluid w-150" src="img/locluxe.jfif"
+                                alt="">
                         </div>
                         <h4 class="text-uppercase text-center  mb-3">Location voitures de luxe</h4>
                         <p class="m-0 text-center">Vivez le raffinement avec nos voitures de luxe, parfaites pour vos
@@ -235,6 +163,7 @@
         </div>
     </div>
     <!-- Services End -->
+
     <!-- valeurs Start -->
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">

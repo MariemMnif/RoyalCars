@@ -77,11 +77,11 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">ACCUEIL</a>
+                        <a href="{{ route('accueil') }}" class="nav-item nav-link active">ACCUEIL</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Nos Voitures</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="car.html" class="dropdown-item">Toutes nos voitures</a>
+                                <a href="{{ route('listVoitures') }}" class="dropdown-item">Toutes nos voitures</a>
                                 <a href="detail.html" class="dropdown-item">Voiture de luxe</a>
                             </div>
                         </div>
