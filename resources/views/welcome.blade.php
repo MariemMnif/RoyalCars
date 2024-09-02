@@ -9,29 +9,45 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="{{ asset('img/favicon.ico') }}" rel="icon">
+    <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="{{ asset('https://fonts.gstatic.com') }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="{{ asset('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik&display=swap') }}"
         rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css') }}"
+        rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="{{ asset('/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="{{ asset('js/main.js') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <style>
+        .datepicker table tr td.disabled,
+        .datepicker table tr td.disabled:hover {
+            background: none;
+            color: #999999;
+            cursor: default;
+        }
+
+
+        .datepicker table tr td {
+            padding: 8px;
+            /* Ajoute de l'espace à l'intérieur des cellules du calendrier */
+        }
+    </style>
 </head>
 
-<body>
+<body class="bg-light ">
+
     <!-- Topbar Start -->
     <div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
         <div class="row">
@@ -78,25 +94,17 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="service.html" class="nav-item nav-link">Service</a>
+                        <a href="{{ route('accueil') }}" class="nav-item nav-link active">ACCUEIL</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cars</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Nos Voitures</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="car.html" class="dropdown-item">Car Listing</a>
-                                <a href="detail.html" class="dropdown-item">Car Detail</a>
-                                <a href="booking.html" class="dropdown-item">Car Booking</a>
+                                <a href="{{ route('listVoitures') }}" class="dropdown-item">Toutes nos voitures</a>
+                                <a href="detail.html" class="dropdown-item">Voiture de luxe</a>
                             </div>
                         </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="team.html" class="dropdown-item">The Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="{{ route('connexion') }}" class="nav-item nav-link">ESPACE CLIENT</a>
+                        <a href="{{ route('a-propos') }}" class="nav-item nav-link">À propos</a>
+                        <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
                     </div>
                 </div>
             </nav>
@@ -105,240 +113,33 @@
     <!-- Navbar End -->
 
 
-    <!-- Search Start -->
-    <div class="container-fluid bg-white pt-3 px-lg-5">
-        <div class="row mx-n2">
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <label for=" " class="form-label">Lieu de prise en charge</label>
-                <select class="custom-select px-4 mb-3" style="height: 50px;">
-                    <option selected></option>
-                    <optgroup label="Aéroports">
-                        <option value="TUN">Aéroport Tunis Carthage</option>
-                        <option value="NBE">Aéroport Enfidha</option>
-                        <option value="MIR">Aéroport Monastir</option>
-                        <option value="DJE">Aéroport Djerba</option>
-                        <option value="TBJ">Aéroport Tozeur</option>
-                    </optgroup>
-
-                    <optgroup label="Centres-Villes">
-                        <option value="Tunis">Tunis</option>
-                        <option value="Hammamet">Hammamet</option>
-                        <option value="Sousse">Sousse</option>
-                        <option value="Monastir">Monastir</option>
-                        <option value="Djerba">Djerba</option>
-                        <option value="Kairouan">Kairouan</option>
-                        <option value="Sfax">Sfax</option>
-                        <option value="Tabarka">Tabarka</option>
-                        <option value="Bizerte">Bizerte</option>
-                        <option value="Mahdia">Mahdia</option>
-                    </optgroup>
-                </select>
-            </div>
-
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <div class="date mb-3" id="dateLocationContainer" data-target-input="nearest">
-                    <label for="dateLocation" class="form-label">Date de location</label>
-                    <div class="input-group">
-                        <input type="text" id="dateLocation" name="dateLocation"
-                            class="form-control p-4 datetimepicker-input" placeholder="jj/mm/aaaa"
-                            data-target="#dateLocationContainer" data-toggle="datetimepicker" min="" />
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <div class="time mb-3" id="heureLocation" data-target-input="nearest">
-                    <label for="heureLocation" class="form-label">Heure de location</label>
-                    <input type="text" class="form-control p-4 datetimepicker-input" placeholder="hh:mm"
-                        data-target="#heureLocation" data-toggle="datetimepicker" id="name" />
-                </div>
-            </div>
-
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <div class="date mb-3" id="dateRetourContainer" data-target-input="nearest">
-                    <label for="dateRetour" class="form-label">Date de retour</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control p-4 datetimepicker-input" placeholder="jj/mm/aaaa"
-                            data-target="#dateRetourContainer" data-toggle="datetimepicker" id="dateRetour"
-                            name="dateRetour" />
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <div class="time mb-3" id="heureRetourContainer" data-target-input="nearest">
-                    <label for="heureRetour" class="form-label">Heure de retour</label>
-                    <input type="text" class="form-control p-4 datetimepicker-input" placeholder="hh:mm"
-                        id="heureRetour" data-target="#heureRetourContainer" data-toggle="datetimepicker" />
-                </div>
-            </div>
-
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2 d-flex align-items-end">
-                <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
-            </div>
-        </div>
-        <div class="row mx-n2">
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="LieuRestitution"
-                    name="LieuRestitution"checked>
-                <label class="custom-control-label" for="LieuRestitution">Lieu de restitution identique</label>
-            </div>
-        </div>
-        <div id="LocRestitution" class="row mx-n2">
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style="height: 50px;">
-                    <option selected></option>
-                    <optgroup label="Aéroports">
-                        <option value="TUN">Aéroport Tunis Carthage</option>
-                        <option value="NBE">Aéroport Enfidha</option>
-                        <option value="MIR">Aéroport Monastir</option>
-                        <option value="DJE">Aéroport Djerba</option>
-                        <option value="TBJ">Aéroport Tozeur</option>
-                    </optgroup>
-
-                    <optgroup label="Centres-Villes">
-                        <option value="Tunis">Tunis</option>
-                        <option value="Hammamet">Hammamet</option>
-                        <option value="Sousse">Sousse</option>
-                        <option value="Monastir">Monastir</option>
-                        <option value="Djerba">Djerba</option>
-                        <option value="Kairouan">Kairouan</option>
-                        <option value="Sfax">Sfax</option>
-                        <option value="Tabarka">Tabarka</option>
-                        <option value="Bizerte">Bizerte</option>
-                        <option value="Mahdia">Mahdia</option>
-                    </optgroup>
-                </select>
-            </div>
-
-        </div>
-        <!-- Footer Start -->
-        <div class="container-fluid bg-secondary py-5 px-sm-3 px-md-5" style="margin-top: 90px;">
-            <div class="row pt-5">
-                <div class="col-lg-3 col-md-6 mb-5">
-                    <h4 class="text-uppercase text-light mb-4">Get In Touch</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-white mr-3"></i>123 Street, New York, USA
-                    </p>
-                    <p class="mb-2"><i class="fa fa-phone-alt text-white mr-3"></i>+012 345 67890</p>
-                    <p><i class="fa fa-envelope text-white mr-3"></i>info@example.com</p>
-                    <h6 class="text-uppercase text-white py-2">Follow Us</h6>
-                    <div class="d-flex justify-content-start">
-                        <a class="btn btn-lg btn-dark btn-lg-square mr-2" href="#"><i
-                                class="fab fa-twitter"></i></a>
-                        <a class="btn btn-lg btn-dark btn-lg-square mr-2" href="#"><i
-                                class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-lg btn-dark btn-lg-square mr-2" href="#"><i
-                                class="fab fa-linkedin-in"></i></a>
-                        <a class="btn btn-lg btn-dark btn-lg-square" href="#"><i
-                                class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-5">
-                    <h4 class="text-uppercase text-light mb-4">Usefull Links</h4>
-                    <div class="d-flex flex-column justify-content-start">
-                        <a class="text-body mb-2" href="#"><i
-                                class="fa fa-angle-right text-white mr-2"></i>Private
-                            Policy</a>
-                        <a class="text-body mb-2" href="#"><i
-                                class="fa fa-angle-right text-white mr-2"></i>Term &
-                            Conditions</a>
-                        <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>New
-                            Member Registration</a>
-                        <a class="text-body mb-2" href="#"><i
-                                class="fa fa-angle-right text-white mr-2"></i>Affiliate Programme</a>
-                        <a class="text-body mb-2" href="#"><i
-                                class="fa fa-angle-right text-white mr-2"></i>Return
-                            & Refund</a>
-                        <a class="text-body" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Help &
-                            FQAs</a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-5">
-                    <h4 class="text-uppercase text-light mb-4">Car Gallery</h4>
-                    <div class="row mx-n1">
-                        <div class="col-4 px-1 mb-2">
-                            <a href=""><img class="w-100" src="img/gallery-1.jpg" alt=""></a>
-                        </div>
-                        <div class="col-4 px-1 mb-2">
-                            <a href=""><img class="w-100" src="img/gallery-2.jpg" alt=""></a>
-                        </div>
-                        <div class="col-4 px-1 mb-2">
-                            <a href=""><img class="w-100" src="img/gallery-3.jpg" alt=""></a>
-                        </div>
-                        <div class="col-4 px-1 mb-2">
-                            <a href=""><img class="w-100" src="img/gallery-4.jpg" alt=""></a>
-                        </div>
-                        <div class="col-4 px-1 mb-2">
-                            <a href=""><img class="w-100" src="img/gallery-5.jpg" alt=""></a>
-                        </div>
-                        <div class="col-4 px-1 mb-2">
-                            <a href=""><img class="w-100" src="img/gallery-6.jpg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-5">
-                    <h4 class="text-uppercase text-light mb-4">Newsletter</h4>
-                    <p class="mb-4">Volup amet magna clita tempor. Tempor sea eos vero ipsum. Lorem lorem sit sed
-                        elitr
-                        sed kasd et</p>
-                    <div class="w-100 mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-dark border-dark" style="padding: 25px;"
-                                placeholder="Your Email">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary text-uppercase px-3">Sign Up</button>
-                            </div>
-                        </div>
-                    </div>
-                    <i>Lorem sit sed elitr sed kasd et</i>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid bg-dark py-4 px-sm-3 px-md-5">
-            <p class="mb-2 text-center text-body">&copy; <a href="#">Your Site Name</a>. All Rights Reserved.
-            </p>
-
-            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-            <p class="m-0 text-center text-body">Designed by <a href="https://htmlcodex.com">HTML Codex</a></p>
-        </div>
-        <!-- Footer End -->
+    @yield('contenu')
 
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
-            <i class="fa fa-angle-double-up"></i>
-        </a>
 
+    <!-- JavaScript Libraries -->
+    <script src="{{ asset('https://code.jquery.com/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ asset('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('lib/tempusdominus/js/moment.min.js') }}"></script>
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/easing/easing.min.js') }}"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/tempusdominus/js/moment.min.js"></script>
-        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Pour date remplacer ces deus lignes
+    <script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+    <script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script> -->
 
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var checkbox = document.getElementById('LieuRestitution');
-                var locationSection = document.getElementById('LocRestitution');
-
-                function toggleLocationSection() {
-                    locationSection.style.display = checkbox.checked ? 'none' : 'block';
-                }
-
-                toggleLocationSection();
-                checkbox.addEventListener('change', toggleLocationSection);
-            });
-        </script>
+    <!-- Par  -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <!--heure-->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="{{ asset('js/main.js') }}"></script>
 
 </body>
 

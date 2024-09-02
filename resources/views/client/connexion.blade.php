@@ -7,46 +7,49 @@
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <h1 class="display-4 text-uppercase text-center mb-5">Espace client</h1>
+            <form method="POST" action="">
+                @csrf
+                <div class="row contact-form bg-light">
+                    <div class="col-lg-8 mb-2  ">
 
-            <div class="row contact-form bg-light">
-                <div class="col-lg-8 mb-2  ">
+                        <div style="padding: 30px;">
+                            <form>
+                                <div class="row">
 
-                    <div class="mb-4 " style="padding: 30px;">
-                        <form>
-                            <div class="row">
+                                    <p>Vous avez commandé un véhicule et souhaitez en savoir plus sur l'état de votre
+                                        dossier
+                                        de réservation? Identifiez-vous maintenant!</p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control p-4" placeholder="Email" name="email"
+                                        required="required">
+                                </div>
 
-                                <p>Vous avez commandé un véhicule et souhaitez en savoir plus sur l'état de votre dossier
-                                    de réservation? Identifiez-vous maintenant!</p>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control p-4" placeholder="Email" name="email"
-                                    required="required">
-                            </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control p-4" placeholder="Mot de passe "
+                                        name="mdp" required="required">
+                                </div>
+                                <div class="container pt-2 pb-2">
+                                    <a href="#" id="myBtn" style=" color:var(--dark);">Mot de passe oublié ?</a>
+                                </div>
+                                <div style="text-align: right;">
+                                    <button class="btn btn-primary py-3 px-5" type="submit">Connexion</button>
+                                </div>
+                            </form>
 
-                            <div class="form-group">
-                                <input type="password" class="form-control p-4" placeholder="Mot de passe " name="mdp"
-                                    required="required">
-                            </div>
-                            <div class="container pt-2 pb-2">
-                                <a href="#" id="myBtn" style=" color:var(--dark);">Mot de passe oublié ?</a>
-
-
-                            </div>
-                            <div style="text-align: right;">
-                                <button class="btn btn-primary py-3 px-5" type="submit">Connexion</button>
-                            </div>
-                        </form>
-
+                        </div>
+                        <div class="text-center ">
+                            <p>Vous n'avez pas encore de compte ? <a href="{{ route('inscription') }}"
+                                    style="color: var(--dark);">Inscrivez-vous ici</a>.</p>
+                        </div>
                     </div>
-
-                </div>
-                <div class="col-lg-4 d-flex justify-content-center align-items-center p-0">
-                    <img class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" src="img/cars2.jpg">
-                </div>
-
-            </div>
-
+                    <div class="col-lg-4 d-flex justify-content-center align-items-center p-0">
+                        <img class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" src="img/cars2.jpg">
+                    </div>
+            </form>
         </div>
+
+    </div>
     </div>
 
     <!-- Modal HTML -->
