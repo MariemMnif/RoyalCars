@@ -194,7 +194,7 @@
                                     </div>
                                     <div class="col-4 form-group">
                                         <div class="time mb-3" id="horaireVol" data-target-input="nearest">
-                                            <label for="horaireVol" class="form-label">Heure de location</label>
+                                            <label for="horaireVol" class="form-label">Horaire du vol</label>
                                             <input type="text" name="horaireVol"
                                                 class="form-control p-4 datetimepicker-input" placeholder="hh:mm"
                                                 data-target="#horaireVol" data-toggle="datetimepicker" name="horaireVol"

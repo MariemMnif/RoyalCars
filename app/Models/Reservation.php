@@ -26,6 +26,10 @@ class Reservation extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function vol()
+    {
+        return $this->belongsTo(Vol::class);
+    }
     public function voiture()
     {
         return $this->belongsTo(Voiture::class);

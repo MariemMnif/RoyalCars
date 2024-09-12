@@ -45,11 +45,14 @@ class VoitureController extends Controller
             'disponibilite' => 'disponible',
             'prix' => 150
         ]);*/
-
-
-
         $voitures = Voiture::all();
         return view('client.listVoitures', compact('voitures'));
+    }
+
+    public function getAllVoituresAdmin()
+    {
+        $voitures = Voiture::all();
+        return view('admin.voitures.listVoitures', compact('voitures'));
     }
     public function getVoiture($id, Request $request)
     {
@@ -109,6 +112,115 @@ class VoitureController extends Controller
             'nbMax' => 1,
         ]);*/
         $supplements = Supplement::all();
-        return view('client.reservation', compact('voiture', 'supplements', 'lieuPrise', 'dateLocation', 'heureLocation', 'dateRetour', 'heureRetour', 'lieuRes', 'diffInDays', 'prixTot'));
+        return view('client.reservation.reservation', compact('voiture', 'supplements', 'lieuPrise', 'dateLocation', 'heureLocation', 'dateRetour', 'heureRetour', 'lieuRes', 'diffInDays', 'prixTot'));
+    }
+
+    public function create()
+    {
+        return view('admin.voitures.addVoiture');
+    }
+    public function addVoiture(Request $request)
+    {
+        $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'marque_modele' => 'required|string|max:255',
+            'annee_fabrication' => 'required|integer',
+            'etat' => 'required|string|max:255',
+            'type_transmission' => 'required|string',
+            'nb_places' => 'required|integer',
+            'categorie' => 'required|string',
+            'type_carburant' => 'required|string',
+            'disponibilite' => 'required|string',
+            'prix' => 'required|numeric',
+            'description' => 'nullable|string',
+        ]);
+
+        $voiture = new Voiture();
+        $voiture->marque_modele = $request->marque_modele;
+        $voiture->annee_fabrication = $request->annee_fabrication;
+        $voiture->etat = $request->etat;
+        $voiture->type_transmission = $request->type_transmission;
+        $voiture->nb_places = $request->nb_places;
+        $voiture->nb_portes = $request->nb_portes;
+        $voiture->categorie = $request->categorie;
+        $voiture->capacite_coffre = $request->capacite_coffre;
+        $voiture->type_carburant = $request->type_carburant;
+        $voiture->disponibilite = $request->disponibilite;
+        $voiture->prix = $request->prix;
+        $voiture->description = $request->description;
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->file('image')->storeAs('public/img', $imageName);
+            $voiture->image = $imageName;
+        }
+        $voiture->save();
+
+        return redirect()->route('voiture.listVoiture')->with('success', 'Voiture ajoutée avec succès.');
+    }
+    public function getDetailsVoiture($id)
+    {
+        $voiture = Voiture::where('id', $id)->first();
+        return view('admin.voitures.DetailsVoiture', compact('voiture'));
+    }
+
+    public function edit($id)
+    {
+        $voiture = Voiture::findOrFail($id);
+        return view('admin.voitures.editVoiture', compact('voiture'));
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'marque_modele' => 'required|string|max:255',
+            'annee_fabrication' => 'required|integer|min:1900|max:' . date('Y'),
+            'etat' => 'required|string|max:255',
+            'type_transmission' => 'nullable|string|max:255',
+            'nb_places' => 'required|integer|min:1',
+            'categorie' => 'nullable|string|max:255',
+            'type_carburant' => 'nullable|string|max:255',
+            'disponibilite' => 'required|string|in:Disponible,Non disponible',
+            'prix' => 'required|numeric|min:0',
+            'description' => 'nullable|string|max:1000',
+        ]);
+
+
+        $voiture = Voiture::findOrFail($id);
+
+        $voiture->marque_modele = $request->input('marque_modele');
+        $voiture->annee_fabrication = $request->input('annee_fabrication');
+        $voiture->etat = $request->input('etat');
+        $voiture->type_transmission = $request->input('type_transmission');
+        $voiture->nb_places = $request->input('nb_places');
+        $voiture->categorie = $request->input('categorie');
+        $voiture->capacite_coffre = $request->input('capacite_coffre');
+        $voiture->type_carburant = $request->input('type_carburant');
+        $voiture->disponibilite = $request->input('disponibilite');
+        $voiture->prix = $request->input('prix');
+        $voiture->description = $request->input('description');
+
+
+        if ($request->hasFile('image')) {
+
+            $imageName = time() . '.' . $request->file('image')->extension();
+            $request->file('image')->storeAs('public/img', $imageName);
+            if ($voiture->image && file_exists(storage_path('app/public/img/' . $voiture->image))) {
+                unlink(storage_path('app/public/img/' . $voiture->image));
+            }
+            $voiture->image = $imageName;
+        }
+        $voiture->save();
+        return redirect()->route('voiture.listVoiture')->with('success', 'Voiture mise à jour avec succès.');
+    }
+    public function destroy(Voiture $voiture)
+    {
+        if ($voiture->reservations()->exists()) {
+            return redirect()->route('voiture.listVoiture')->with('error', 'La voiture ne peut pas être supprimée car elle est associée à une  réservation.');
+        }
+        if ($voiture->image && file_exists(storage_path('app/public/img/' . $voiture->image))) {
+            unlink(storage_path('app/public/img/' . $voiture->image));
+        }
+        $voiture->delete();
+        return redirect()->route('voiture.listVoiture')->with('success', 'Voiture supprimé avec succès');
     }
 }

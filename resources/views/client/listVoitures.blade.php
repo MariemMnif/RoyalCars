@@ -87,8 +87,7 @@
                             </div>
                             <div class="rent-item mb-4">
 
-                                <img class="img-fluid mb-4" src="img/car-rent-1.png">
-
+                                <img src="{{ asset('img/' . $voiture->image) }}"class="img-fluid rounded-start">
                                 <h4 class="text-uppercase mb-4">{{ $voiture->marque_modele }}
                                     {{ $voiture->annee_fabrication }}
                                 </h4>
