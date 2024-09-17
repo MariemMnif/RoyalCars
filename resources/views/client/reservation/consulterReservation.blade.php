@@ -138,6 +138,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> <a href="{{ route('listReservations') }}" class="btn btn-secondary mt-3">Retour à la Liste des
+            reservations</a>
     </div>
 @endsection

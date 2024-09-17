@@ -8,7 +8,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="image" class="form-label">Image de la Voiture</label>
-                    <input type="file" class="form-control" id="image" name="image">
+                    <input type="file" class="form-control" id="image" name="image" required>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">
@@ -22,7 +22,7 @@
                     <div class="col-md-4">
                         <label for="categorie" class="form-label">Catégorie</label>
                         <select class="form-control" id="categorie" name="categorie">
-                            <option value="" disabled>Catégorie</option>
+                            <option value="" selected>Catégorie</option>
                             <option value="économique">Économique</option>
                             <option value="citadine">Citadine</option>
                             <option value="compacte">Compacte</option>
@@ -35,7 +35,7 @@
                     <div class="col-md-4">
                         <label for="type_transmission" class="form-label">Transmission</label>
                         <select class="form-control" id="type_transmission" name="type_transmission">
-                            <option value="" disabled>Choisir transmission</option>
+                            <option value="" selected>Choisir transmission</option>
                             <option value="automatique">Automatique</option>
                             <option value="manuelle">Manuelle</option>
                         </select>
@@ -44,7 +44,7 @@
                     <div class="col-md-4">
                         <label for="nb_places" class="form-label">Nombre de Sièges</label>
                         <select class="form-control" id="nb_places" name="nb_places">
-                            <option value="" disabled>Choisir le nombre de sièges</option>
+                            <option value="" selected>Choisir le nombre de sièges</option>
                             <option value="4">4 sièges</option>
                             <option value="5">5 sièges</option>
                             <option value="7">7 sièges</option>
@@ -55,7 +55,7 @@
                     <div class="col-md-4">
                         <label for="nb_portes" class="form-label">Nombre de Portes</label>
                         <select class="form-control" id="nb_portes" name="nb_portes" required>
-                            <option value="" disabled selected>Choisir le nombre de portes</option>
+                            <option value="" selected>Choisir le nombre de portes</option>
                             <option value="2">2 portes</option>
                             <option value="4">4 portes</option>
                             <option value="5">5 portes</option>
@@ -67,15 +67,15 @@
                     <div class="col-md-4">
                         <label for="type_carburant" class="form-label">Choisir carburant</label>
                         <select class="form-control" id="type_carburant" name="type_carburant">
-                            <option value="" disabled>Carburant</option>
+                            <option value="" selected>Carburant</option>
                             <option value="diesel">Diesel</option>
                             <option value="essence">Essence</option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label for="capacite_coffre" class="form-label">Capacité du Coffre</label>
-                        <select class="form-control" id="disponibilite" name="capacite_coffre" required>
-                            <option value="" disabled>Choisir capacite coffre</option>
+                        <select class="form-control" id="capacite_coffre" name="capacite_coffre" required>
+                            <option value="" selected>Choisir capacite coffre</option>
                             <option value="2">2 bagages</option>
                             <option value="4">4 bagages</option>
                             <option value="5">5 bagages</option>
@@ -85,7 +85,7 @@
                     <div class="col-md-4">
                         <label for="disponibilite" class="form-label">Disponibilité</label>
                         <select class="form-control" id="disponibilite" name="disponibilite" required>
-                            <option value="" disabled>Choisir une option</option>
+                            <option value="" selected>Choisir une option</option>
                             <option value="disponible">disponible</option>
                             <option value="non disponible">non disponible</option>
                         </select>

@@ -77,69 +77,67 @@
                     <p>Aucune voiture disponible selon les critères de recherche.</p>
                 @endif
                 @foreach ($voitures as $voiture)
-                    @if ($voiture->disponibilite == 'disponible')
-                        <div class="col-lg-4 col-md-6 mb-2 car-item" data-transmission="{{ $voiture->type_transmission }}"
-                            data-siege="{{ $voiture->nb_places }}" data-categorie="{{ $voiture->categorie }}"
-                            data-carburant="{{ $voiture->type_carburant }}">
-                            <!-- Catégorie -->
-                            <div class="category-box btn-primary text-uppercase position-absolute top-0 end-0 p-2">
-                                {{ $voiture->categorie }}
-                            </div>
-                            <div class="rent-item mb-4">
-
-                                <img src="{{ asset('img/' . $voiture->image) }}"class="img-fluid rounded-start">
-                                <h4 class="text-uppercase mb-4">{{ $voiture->marque_modele }}
-                                    {{ $voiture->annee_fabrication }}
-                                </h4>
-                                <div class="d-flex justify-content-center mb-4">
-                                    <div class="px-2  border-right">
-                                        <img src="{{ asset('icons/oil.png') }}" width="24" height="24">
-                                        <span>{{ $voiture->type_carburant }}</span>
-                                    </div>
-                                    <div class="px-2 border-left border-right">
-                                        <img src="{{ asset('icons/car-door.png') }}" width="24" height="24">
-                                        <span>{{ $voiture->nb_portes }}</span>
-                                    </div>
-                                    <div class="px-2 border-left border-right">
-                                        <img src="{{ asset('icons/luggage.png') }}" width="24" height="24">
-                                        <span>{{ $voiture->capacite_coffre }}</span>
-                                    </div>
-                                    <div class="px-2 border-left border-right">
-                                        <img src="{{ asset('icons/person.png') }}" width="24"height=" 24">
-                                        <span>{{ $voiture->nb_places }}</span>
-                                    </div>
-                                    <div class="px-2">
-                                        <img src="{{ asset('icons/transmission.png') }}" width="24" height="24">
-                                        <span>{{ $voiture->type_transmission }}</span>
-                                    </div>
-                                </div>
-                                <div class="p-0">
-                                    <p class=" p-0 text-left" style="color:#ff7f00; font-size: 20px;  margin-bottom: 2px; ">
-                                        Détail du tarif :</p>
-                                    <p style="text-align: left; font-size: 16px; margin-top: 0;">{!! $voiture->description !!}</p>
-                                </div>
-                                <div>
-                                    <h4
-                                        style="display: inline-block; font-size: 18px; text-align: left; text-transform: uppercase; margin-right: 10px;">
-                                        Prix par jour :</h4>
-                                    <p
-                                        style="display: inline-block;text-align: left; text-transform: uppercase; margin-right: 10px; font-size: 21px;">
-                                        {{ $voiture->prix }} DT</p>
-                                </div>
-
-                                <a id="reserve-button" class="btn btn-primary px-3"
-                                    href="{{ route('reservation', [
-                                        'id' => $voiture->id,
-                                        'lieuPrise' => request()->input('lieuPrise'),
-                                        'dateLocation' => request()->input('dateLocation'),
-                                        'heureLocation' => request()->input('heureLocation'),
-                                        'dateRetour' => request()->input('dateRetour'),
-                                        'heureRetour' => request()->input('heureRetour'),
-                                        'lieuRes' => request()->input('lieuRes'),
-                                    ]) }}">Préserver</a>
-                            </div>
+                    <div class="col-lg-4 col-md-6 mb-2 car-item" data-transmission="{{ $voiture->type_transmission }}"
+                        data-siege="{{ $voiture->nb_places }}" data-categorie="{{ $voiture->categorie }}"
+                        data-carburant="{{ $voiture->type_carburant }}">
+                        <!-- Catégorie -->
+                        <div class="category-box btn-primary text-uppercase position-absolute top-0 end-0 p-2">
+                            {{ $voiture->categorie }}
                         </div>
-                    @endif
+                        <div class="rent-item mb-4">
+
+                            <img src="{{ asset('storage/img/' . $voiture->image) }}"class="img-fluid rounded-start">
+                            <h4 class="text-uppercase mb-4">{{ $voiture->marque_modele }}
+                                {{ $voiture->annee_fabrication }}
+                            </h4>
+                            <div class="d-flex justify-content-center mb-4">
+                                <div class="px-2  border-right">
+                                    <img src="{{ asset('icons/oil.png') }}" width="24" height="24">
+                                    <span>{{ $voiture->type_carburant }}</span>
+                                </div>
+                                <div class="px-2 border-left border-right">
+                                    <img src="{{ asset('icons/car-door.png') }}" width="24" height="24">
+                                    <span>{{ $voiture->nb_portes }}</span>
+                                </div>
+                                <div class="px-2 border-left border-right">
+                                    <img src="{{ asset('icons/luggage.png') }}" width="24" height="24">
+                                    <span>{{ $voiture->capacite_coffre }}</span>
+                                </div>
+                                <div class="px-2 border-left border-right">
+                                    <img src="{{ asset('icons/person.png') }}" width="24"height=" 24">
+                                    <span>{{ $voiture->nb_places }}</span>
+                                </div>
+                                <div class="px-2">
+                                    <img src="{{ asset('icons/transmission.png') }}" width="24" height="24">
+                                    <span>{{ $voiture->type_transmission }}</span>
+                                </div>
+                            </div>
+                            <div class="p-0">
+                                <p class=" p-0 text-left" style="color:#ff7f00; font-size: 20px;  margin-bottom: 2px; ">
+                                    Détail du tarif :</p>
+                                <p style="text-align: left; font-size: 16px; margin-top: 0;">{!! $voiture->description !!}</p>
+                            </div>
+                            <div>
+                                <h4
+                                    style="display: inline-block; font-size: 18px; text-align: left; text-transform: uppercase; margin-right: 10px;">
+                                    Prix par jour :</h4>
+                                <p
+                                    style="display: inline-block;text-align: left; text-transform: uppercase; margin-right: 10px; font-size: 21px;">
+                                    {{ $voiture->prix }} DT</p>
+                            </div>
+
+                            <a id="reserve-button" class="btn btn-primary px-3"
+                                href="{{ route('reservation', [
+                                    'id' => $voiture->id,
+                                    'lieuPrise' => request()->input('lieuPrise'),
+                                    'dateLocation' => request()->input('dateLocation'),
+                                    'heureLocation' => request()->input('heureLocation'),
+                                    'dateRetour' => request()->input('dateRetour'),
+                                    'heureRetour' => request()->input('heureRetour'),
+                                    'lieuRes' => request()->input('lieuRes'),
+                                ]) }}">Préserver</a>
+                        </div>
+                    </div>
                 @endforeach
             </div>
         </div>

@@ -8,10 +8,14 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ReservationRequestNotification extends Notification
+class ReservationUpdatedByClient extends Notification
 {
     use Queueable;
     private $reservation;
+    /**
+     * Create a new notification instance.
+     */
+
 
     public function __construct($reservation)
     {
@@ -36,8 +40,8 @@ class ReservationRequestNotification extends Notification
         $dateLocation = Carbon::createFromFormat('Y-m-d', $this->reservation->date_location)->format('d/m/Y');
         $dateRetour = Carbon::createFromFormat('Y-m-d', $this->reservation->date_retour)->format('d/m/Y');
         return (new MailMessage)
-            ->subject('Nouvelle Réservation')
-            ->line('Une nouvelle réservation a été effectuée.')
+            ->subject('Réservation Modifiée par un Client')
+            ->line('Un client a modifié une réservation.')
             ->line('Détails de la réservation :')
             ->line('Id reservation : ' . $this->reservation->id)
             ->line('Client : ' . $this->reservation->user->first_name . $this->reservation->user->name)

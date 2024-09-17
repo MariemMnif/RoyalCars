@@ -19,7 +19,8 @@
                                     @foreach ($supplements as $supplement)
                                         <div class="row mt-4">
                                             <div class="col-md col-6">
-                                                <img src="{{ asset('img/' . $supplement->image) }}" class="img-fluid">
+                                                <img src="{{ asset('storage/img/' . $supplement->image) }}"
+                                                    class="img-fluid">
                                             </div>
                                             <div class="col-md-4  mt-2 align-self-center">
                                                 <div class="font-weight-bold text-uppercase">{{ $supplement->libelle }}

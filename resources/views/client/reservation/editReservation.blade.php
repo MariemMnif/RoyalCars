@@ -11,12 +11,11 @@
                     <div class="col-lg-8">
                         <h2 class="mb-0">Options pour compléter votre location</h2>
                         <div class="card-body py-2 mb-2 m-2">
-
                             @foreach ($supplements as $supplement)
                                 <div class="row mt-4">
                                     <!-- Pré-remplir les valeurs des options avec les données existantes -->
                                     <div class="col-md col-6">
-                                        <img src="{{ asset('img/' . $supplement->image) }}" class="img-fluid">
+                                        <img src="{{ asset('storage/img/' . $supplement->image) }}" class="img-fluid">
                                     </div>
                                     <div class="col-md-4 mt-2 align-self-center">
                                         <div class="font-weight-bold text-uppercase">{{ $supplement->libelle }}</div>
@@ -45,6 +44,8 @@
                                                 </div>
                                             @else
                                                 <div class="mb-2 mt-4">
+                                                    <input type="hidden" name="supplement[{{ $supplement->id }}]"
+                                                        value="0">
                                                     <span class="font-weight-bold" style="font-size: 13px;">Non</span>
                                                     <label class="switch switch-green">
                                                         <input type="checkbox" name="supplement[{{ $supplement->id }}]"
@@ -263,6 +264,7 @@
             </div>
             <!-- End Cost Summary -->
         </form>
+        <a href="{{ route('listReservations') }}" class="btn btn-secondary mt-3">Retour à la Liste des reservations</a>
     </div>
 @endsection
 <script>

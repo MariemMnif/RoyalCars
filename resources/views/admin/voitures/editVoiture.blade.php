@@ -11,7 +11,7 @@
                     <label for="image" class="form-label">Image de la Voiture</label>
                     <input type="file" class="form-control" id="image" name="image">
                     @if ($voiture->image)
-                        <img src="{{ asset('img/' . $voiture->image) }}" alt="Image actuelle" class="mt-2"
+                        <img src="{{ asset('storage/img/' . $voiture->image) }}" alt="Image actuelle" class="mt-2"
                             style="max-width: 200px;">
                     @endif
                 </div>

@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Vol;
+use App\Models\User;
 use App\Models\Voiture;
 use App\Models\Supplement;
 use App\Models\Reservation;
+use App\Notifications\ReservationEtatUpdated;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\User;
+//use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\ReservationRequestNotification;
+use App\Notifications\ReservationUpdatedByClient;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReservationController extends Controller
@@ -36,8 +39,18 @@ class ReservationController extends Controller
         } else {
             $lieuRes = $request->input('lieuRes');
         }
-
-        $voitures = Voiture::all();
+        $dateTimeLocation = $dateLocation . ' ' . $heureLocation;
+        $dateTimeRetour = $dateRetour . ' ' . $heureRetour;
+        $voitures = Voiture::where('disponibilite', 'disponible')
+            ->whereDoesntHave('reservations', function ($query) use ($dateTimeLocation, $dateTimeRetour) {
+                $query->where(function ($q) use ($dateTimeLocation, $dateTimeRetour) {
+                    $q->where(function ($subQuery) use ($dateTimeLocation, $dateTimeRetour) {
+                        $subQuery->where('date_location', '<=', $dateTimeRetour)
+                            ->where('date_retour', '>=', $dateTimeLocation);
+                    });
+                });
+            })
+            ->get();
         return view('client.listVoitures', compact('voitures', 'lieuPrise', 'dateLocation', 'heureLocation', 'dateRetour', 'heureRetour', 'lieuRes'));
     }
 
@@ -89,17 +102,17 @@ class ReservationController extends Controller
                 }
             }
         }
-        /* $admins = User::where('is_admin', true)->get(); // Récupérer tous les admins
+        //notifi
+        $admins = User::where('role', 1)->get();
         Notification::send($admins, new ReservationRequestNotification($reservation));
+        //$user = user::first();
+        // $user::notify(new ReservationRequestNotification($reservation)); // Assurez-vous de récupérer l'administrateur
 
-        // Redirection avec message de succès
-        return redirect()->back()->with('success', 'Votre demande de réservation a été envoyée avec succès.');
-       */
-        return view('client.accueil');
+        return redirect()->route('listReservations')->with('success', 'Votre demande de réservation a été envoyée avec succès.');
     }
     public function getAllReservations()
     {
-        $reservations = Reservation::all();
+        $reservations = Reservation::where('user_id', auth()->id())->get();
         return view('client.reservation.listreservation', compact('reservations'));
     }
 
@@ -144,19 +157,42 @@ class ReservationController extends Controller
         $reservation = Reservation::findOrFail($id);
         $reservation->update($request->all());
         if ($request->has('supplement')) {
+            $existingSupplementIds = $reservation->supplements->pluck('id')->toArray();
+
+            // Mettre à jour ou supprimer les suppléments existants
             foreach ($request->input('supplement') as $supplementId => $quantite) {
-                $supplement = $reservation->supplements()->where('supplement_id', $supplementId)->first();
-                if ($supplement) {
-                    // Mettre à jour la quantité
-                    $supplement->pivot->update(['quantite' => $quantite]);
+                $supplement = Supplement::find($supplementId);
+                $montantSupplement = $supplement ? $supplement->prix * $quantite : 0;
+
+                if ($quantite > 0) {
+                    if (in_array($supplementId, $existingSupplementIds)) {
+                        $reservation->supplements()->updateExistingPivot($supplementId, [
+                            'quantite' => $quantite,
+                            'montant' => $montantSupplement
+                        ]);
+                    } else {
+                        $reservation->supplements()->attach($supplementId, [
+                            'quantite' => $quantite,
+                            'montant' => $montantSupplement
+                        ]);
+                    }
+                } else {
+                    $reservation->supplements()->detach($supplementId);
                 }
             }
         }
-        if ($request->input('supplement-checkbox')) {
-            dd($request->input('supplement-checkbox'));
-            $supplement->pivot->update(['quantite' => $quantite]);
-        } else {
-            $supplement->pivot->update(['quantite' => 0]);
+        if ($request->has('supplement-checkbox')) {
+            foreach ($request->input('supplement-checkbox') as $supplementId) {
+                $supplement = Supplement::find($supplementId);
+                $montantSupplement = $supplement ? $supplement->prix : 0;
+                $existingSupplement = $reservation->supplements()->where('supplement_id', $supplementId)->first();
+                if (!$existingSupplement) {
+                    $reservation->supplements()->attach($supplementId, [
+                        'quantite' => 1,
+                        'montant' => $montantSupplement
+                    ]);
+                }
+            }
         }
         if ($request->input('volCheckbox')) {
             if ($request->input('NumVol') != null || $request->input('horaireVol') != null) {
@@ -181,6 +217,8 @@ class ReservationController extends Controller
             $volIds = Reservation::where('id', $id)->pluck('vol_id');
             Vol::whereIn('id', $volIds)->delete();
         }
+        $admins = User::where('role', 1)->get();
+        Notification::send($admins, new ReservationUpdatedByClient($reservation));
         return redirect()->route('listReservations')->with('success', 'Réservation mise à jour avec succès.');
     }
 
@@ -304,6 +342,7 @@ class ReservationController extends Controller
             $reservation->voiture->save();
         }
         $reservation->save();
+        Notification::send($reservation->user, new ReservationEtatUpdated($reservation));
         return redirect()->route('reservation.listReservation', $id)->with('success', 'L\'état de la réservation a été mis à jour avec succès.');
     }
 

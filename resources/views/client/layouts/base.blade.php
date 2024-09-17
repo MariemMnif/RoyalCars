@@ -93,13 +93,7 @@
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
                         <a href="{{ route('accueil') }}" class="nav-item nav-link ">ACCUEIL</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Nos Voitures</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="{{ route('listVoitures') }}" class="dropdown-item">Toutes nos voitures</a>
-                                <a href="detail.html" class="dropdown-item">Voiture de luxe</a>
-                            </div>
-                        </div>
+                        <a href="{{ route('listVoitures') }}" class="nav-item nav-link ">Nos Voitures</a>
                         @guest
                             <a href="{{ route('login') }}" class="nav-item nav-link">ESPACE CLIENT</a>
                         @endguest
@@ -109,13 +103,6 @@
                         <!-- Vérifie si l'utilisateur est authentifié -->
                         @auth
                             <a href="{{ route('listReservations') }}" class="nav-item nav-link"> Mes reservations</a>
-                            <a href="#" class="nav-item nav-link position-relative">
-                                <i class="fas fa-bell"></i>
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    3
-                                </span>
-                            </a>
                             <a href="{{ route('logout') }}" class="nav-item nav-link active"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Déconnexion</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

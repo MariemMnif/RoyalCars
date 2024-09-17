@@ -60,7 +60,7 @@ Route::get('/a-propos', function () {
     return view('client.a-propos');
 })->name('a-propos');
 
-//Temoignage
+//Temoignage 
 Route::get('/temoignage', [TemoignageController::class, 'getAllTemoignages'])->name('temoignage');
 Route::post('/temoignage', [TemoignageController::class, 'store'])->name('temoignage.store');
 

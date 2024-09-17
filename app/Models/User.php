@@ -56,4 +56,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Temoignage::class);
     }
+    public function routeNotificationForMail($notification)
+    {
+        return $this->email;
+    }
 }
