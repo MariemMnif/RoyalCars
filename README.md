@@ -1,3 +1,11 @@
+# Royal Cars
+Royal Cars est une application web pour une agence de location de voitures. Elle comprend :
+   - Une interface utilisateur permettant aux clients de réserver des voitures.
+   - Une interface d'administration pour gérer les réservations, les véhicules et les utilisateurs.
+   - Des fonctionnalités supplémentaires, telles que la possibilité d'imprimer des factures et des reçus pour les clients.
+
+
+      
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
